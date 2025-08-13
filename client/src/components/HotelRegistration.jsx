@@ -10,7 +10,7 @@ const HotelRegistration = () => {
   const [contact, setContact] = useState("");
   const [city, setCity] = useState("");
 
-  const { setShowHotelReg , axios, getToken , setIsOwer} = useAppContext();
+  const { setShowHotelReg , axios, getToken , setIsOwner} = useAppContext();
 
   const onSubmitHandler = async (event) => {
     try {
@@ -23,7 +23,7 @@ const HotelRegistration = () => {
 
         if (data.success) {
             toast.success(data.message);
-            setIsOwer(true);
+            setIsOwner(true);
             setShowHotelReg(false);
         } else {
             toast.error(data.message);
