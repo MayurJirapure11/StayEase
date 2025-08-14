@@ -16,41 +16,43 @@ const clerkWebHooks = async (req , res) => {
 
     const {data, type} =  req.body
 
-    // we will store this above created "data" in this "userdata" in a strucute that we have created in the UserData file
-    const userData = {
-      _id : data.id,
-      email : data.email_addresses[0].email_address,
-      username : data.first_name + " " + data.last_name,
-      image : data.image_url,
-
-    }
-
+  
     switch (type) {
-        case "user.created" : {
-          console.log("Check Message - User ID Created ");
-          
-            await User.create(userData);
-              break;
-        }
+      case "user.created": {
+        const userData = {
+          _id: data.id,
+          email: data.email_addresses[0].email_address,
+          username: data.first_name + " " + data.last_name,
+          image: data.image_url,
+        };
+        console.log("Check Message - User ID Created ");
 
-          case "user.updated" : {
-            console.log("Check Message - User ID Updated ");
+        await User.create(userData);
+        break;
+      }
 
-            await User.findByIdAndUpdate(data.id , userData);
-              break;
-          }
+      case "user.updated": {
+        const userData = {
+          _id: data.id,
+          email: data.email_addresses[0].email_address,
+          username: data.first_name + " " + data.last_name,
+          image: data.image_url,
+        };
+        console.log("Check Message - User ID Updated ");
 
-          case "user.deleted" : {
-            console.log("Check Message - User ID Deleted ");
+        await User.findByIdAndUpdate(data.id, userData);
+        break;
+      }
 
-            await User.findByIdAndDelete(data.id);
-              break;
-          }
-            
-    
-        default:
-            break;
+      case "user.deleted": {
+        console.log("Check Message - User ID Deleted ");
 
+        await User.findByIdAndDelete(data.id);
+        break;
+      }
+
+      default:
+        break;
     }
     res.json({success: true, message: "WebHook Received" }) ;
 
