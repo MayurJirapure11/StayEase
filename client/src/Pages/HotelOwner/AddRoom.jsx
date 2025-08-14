@@ -59,7 +59,7 @@ const AddRoom = () => {
       formData.append('amenities', JSON.stringify(amenities))
 
       // Adding images to Form Data
-      Object.keys(images).forEach( (key)=>{
+      Object.keys(images).forEach((key)=>{
             images[key] && formData.append('images' , images[key])
       })
 
