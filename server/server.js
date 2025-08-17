@@ -9,12 +9,15 @@ import hotelRouter from "./routes/hotelRoutes.js"
 import connectCloudinary from "./config/cloudinary.js"
 import roomRouter from "./routes/roomRoutes.js"
 import bookingRouter from "./routes/bookingRoutes.js"
+import { stripeWebHooks } from "./controllers/stripeWebhooks.js"
 
 connectDB()
 connectCloudinary()
 
 const app = express()
 app.use(cors())
+
+app.post('/api/stripe',express.raw({type: "application/json"}),stripeWebHooks)
 
 
 // Middleware
